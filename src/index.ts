@@ -1,23 +1,9 @@
 import express from 'express';
 import express_graphql from 'express-graphql';
-import graphql, { buildSchema } from 'graphql';
 
 import db from './database';
+import { root, schema } from './graphQL';
 
-//////////// GraphQL /////////////
-// GraphQL schema
-const schema: graphql.GraphQLSchema = buildSchema(`
-    type Query {
-        message: String
-    }
-`);
-
-// Root resolver
-const root: any = {
-    message: () => 'Hello World!'
-};
-
-db.getAll();
 
 // Create an express server and a GraphQL endpoint
 const app: express.Application = express();
