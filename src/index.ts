@@ -2,6 +2,8 @@ import express from 'express';
 import express_graphql from 'express-graphql';
 import graphql, { buildSchema } from 'graphql';
 
+import db from './database';
+
 //////////// GraphQL /////////////
 // GraphQL schema
 const schema: graphql.GraphQLSchema = buildSchema(`
