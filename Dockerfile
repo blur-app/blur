@@ -1,3 +1,5 @@
+#THE DOCKERIFLE FOR DEV
+
 FROM node:8
 
 WORKDIR /usr/src/app
@@ -7,4 +9,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 4000
-CMD [ "node", "src/index.js" ]
+CMD npm run prod
