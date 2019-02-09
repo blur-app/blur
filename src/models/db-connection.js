@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 // Set up default mongoose connection
-var mongoDB = 'mongodb://blur-admin:arrogant8sadist@blur-shard-00-00-hsogj.gcp.mongodb.net:27017,blur-shard-00-01-hsogj.gcp.mongodb.net:27017,blur-shard-00-02-hsogj.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Blur-shard-0&authSource=admin&retryWrites=true/BlurDB';
+var mongoDB = 'mongodb://' + proces.env.MONGO_USER + ':'+ process.env.MONGO_PASSWORD+'@blur-shard-00-00-hsogj.gcp.mongodb.net:27017,blur-shard-00-01-hsogj.gcp.mongodb.net:27017,blur-shard-00-02-hsogj.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Blur-shard-0&authSource=admin&retryWrites=true/BlurDB';
 mongoose.connect(mongoDB);
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
