@@ -2,8 +2,8 @@ version: "3"
 
 services:
   blur:
-    build: './'
+    build: ./
+    ports:
+      - "4000:4000"
     env_file:
       - docker/list.env
-    ports:
-      - "8080:8080"
