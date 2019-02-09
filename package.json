@@ -1,0 +1,25 @@
+{
+  "name": "blur",
+  "version": "1.0.0",
+  "description": "media app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blur-app/blur.git"
+  },
+  "author": "csh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blur-app/blur/issues"
+  },
+  "homepage": "https://github.com/blur-app/blur#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1"
+  }
+}
