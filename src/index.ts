@@ -17,6 +17,8 @@ const root: any = {
     message: () => 'Hello World!'
 };
 
+db.getAll();
+
 // Create an express server and a GraphQL endpoint
 const app: express.Application = express();
 app.use('/graphql', express_graphql({
