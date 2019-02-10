@@ -18,6 +18,10 @@ const createUser: Function = (args: User) => {
     return db.createUser(args);
 };
 
+const authUser: Function = (args: Object) => {
+    return db.authUser(args);
+};
+
 
 /*
 React Table Queries
@@ -83,6 +87,7 @@ export default {
     getUsers,
     getUser,
     createUser,
+    authUser,
     getAllPosts,
     getNPosts,
     createPost,

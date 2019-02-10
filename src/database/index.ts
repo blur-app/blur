@@ -41,7 +41,13 @@ const createUser:Function = (args: Object) => {
         .then((data: any) => console.warn('Hiya', data));
 };
 
-
+const authUser:Function = async (args: User) => {
+    const userData = await db.one('SELECT * FROM users WHERE username = $<username>', args);
+    if(userData.password_hash === args.password_hash) {
+        return userData
+    }
+    throw Error('Incorrect Password sir')
+};
 
 /*
 React Table Queries
@@ -118,6 +124,7 @@ export default {
     getUser,
     getAllUsers,
     createUser,
+    authUser,
     getAllPosts,
     getNPosts,
     createPost,
