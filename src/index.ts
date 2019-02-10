@@ -1,7 +1,5 @@
 import express from 'express';
 import express_graphql from 'express-graphql';
-
-import db from './database';
 import { root, schema } from './graphQL';
 
 

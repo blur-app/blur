@@ -18,7 +18,6 @@ const cn:any = {
 
 const db:IDatabase<any> = pgp(cn);
 
-// This is a sample, please please do it differently
 const getUser:Function = async (args: Object) => {
     const data = await db.any('SELECT * FROM users WHERE user_id = $<user_id>', args);
     return data;
