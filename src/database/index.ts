@@ -18,6 +18,12 @@ const cn:any = {
 
 const db:IDatabase<any> = pgp(cn);
 
+
+/*
+User Table Queries
+ */
+
+// Return user based on given id
 const getUser:Function = async (args: Object) => {
     const data = await db.any('SELECT * FROM users WHERE user_id = $<user_id>', args);
     return data;
@@ -34,35 +40,58 @@ const createUser:Function = (args: Object) => {
         .then((data: any) => console.warn('Hiya', data));
 };
 
-// login to services
-
-const daLogin:Function = (args: Object) => {
-    const values: Object = Object.assign({}, args, )
-}
 
 /*
-Post Table Queries
+Post and Content Table Queries
  */
 
 // Return all Posts
 const getAllPosts:Function = async () => {
-    const data = await db.any('SELECT * FROM posts');
+    const data = await db.any('SELECT * FROM posts orderby timestamp');
     return data;
 };
-
+//Return n posts
+const getNPosts:Function = async (n: number) => {
+    const data = await db.any('SELECT * FROM posts orderby timestamp limit ' + String(n));
+    return data;
+};
 // Create new post based on args
 const createPost:Function = (args: Object) => {
     console.warn('in insert dood');
     const values: Object = Object.assign({}, args, {uuid: uuidv4()});
-    db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>)', values)
+    db.none('INSERT INTO users(post_id, uuid, user_id, content_id, timestamp, host, source) VALUES($<post_id>, ' +
+        '$<uuid>, $<user_id>, $<content_id>, $<timestamp>, $<host>, $<source>)', values)
         .then((data: any) => console.warn('Hiya', data));
 };
 
+
+
+
+
+/*
+React Table Queries
+ */
+
+
+
+/*
+PostReact Table Queries
+ */
+
+
+
+// login to services
+const daLogin:Function = (args: Object) => {
+    const values: Object = Object.assign({}, args, )
+}
 
 
 //
 export default {
     getUser,
     getAllUsers,
-    createUser
+    createUser,
+    getAllPosts,
+    getNPosts,
+    createPost
 };

@@ -9,6 +9,7 @@ interface User {
     password_hash: string
     first_name: string
     last_name: string
+    email: string
 }
 
 interface Post {
@@ -17,14 +18,11 @@ interface Post {
     user_id: number
     content_id: number
     timestamp: string
-}
-
-interface Content {
-    content_id: number
-    uuid: string
-    type: number
+    host: string
     source: string
 }
+
+
 
 interface Reacts {
     react_id: number
