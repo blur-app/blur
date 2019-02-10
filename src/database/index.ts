@@ -18,6 +18,9 @@ const cn:any = {
 
 const db:IDatabase<any> = pgp(cn);
 
+///
+/// BIG NOTE: I don't know what the Objects will look like so those args aren't implemented correctly
+///
 
 /*
 User Table Queries
@@ -25,13 +28,11 @@ User Table Queries
 
 // Return user based on given id
 const getUser:Function = async (args: Object) => {
-    const data = await db.any('SELECT * FROM users WHERE user_id = $<user_id>', args);
-    return data;
+    return await db.any('SELECT * FROM users WHERE user_id = $<user_id>', args);
 };
 // Return all Users
 const getAllUsers:Function = async () => {
-    const data = await db.any('SELECT * FROM users');
-    return data;
+    return await db.any('SELECT * FROM users');
 };
 // Create new user based on args
 const createUser:Function = (args: Object) => {
@@ -39,19 +40,32 @@ const createUser:Function = (args: Object) => {
     db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>)', values)
         .then((data: any) => console.warn('Hiya', data));
 };
+
+
+
 /*
-Post and Content Table Queries
+React Table Queries
+ */
+
+// Return all Reacts
+const getAllReacts:Function = async () => {
+    return await db.any('SELECT * FROM reacts orderby name');
+};
+
+
+
+/*
+Post and PostReact Table Queries
  */
 
 // Return all Posts
 const getAllPosts:Function = async () => {
-    const data = await db.any('SELECT * FROM posts orderby timestamp');
-    return data;
+    return await db.any('SELECT * FROM posts outer join postReacts on posts.user_id = postReacts.user_id' +
+        'group by postReacts.post_id order by post.timestamp');
 };
-//Return n posts
+// Return n posts
 const getNPosts:Function = async (n: number) => {
-    const data = await db.any('SELECT * FROM posts orderby timestamp limit ' + String(n));
-    return data;
+    return await db.any('SELECT * FROM posts order by timestamp limit ' + String(n));
 };
 // Create new post based on args
 const createPost:Function = (args: Object) => {
@@ -61,6 +75,12 @@ const createPost:Function = (args: Object) => {
         .then((data: any) => console.warn('Success', data));
 };
 
+
+/*
+OathCreds Table Queries
+ */
+
+//
 const createOauthCreds:Function = (args:Object)=>{
   const values: Object = Object.assign({}, args);
   db.none('INSERT INTO oauth_creds(client_id, client_secret, service, user_id, refresh_token) VALUES(' +
@@ -72,21 +92,25 @@ const createOauthCreds:Function = (args:Object)=>{
 
 
 /*
-React Table Queries
+Following Table Queries
  */
 
+// Return all followings
+const getAllFollowings: Function = async () => {
+    return await db.any('SELECT * FROM following');
+};
 
+// Return user followings in which the user is being followed
+const getUserFollowings: Function = async (args: Object) => {
+    return await db.any('SELECT * FROM following WHERE user_id = $<user_id>', args);
+};
 
-/*
-PostReact Table Queries
- */
-
-
-
-// login to services
-const daLogin:Function = (args: Object) => {
-    const values: Object = Object.assign({}, args, )
-}
+// Create new following
+const createFollowing: Function = (args: Object) => {
+    const values: Object = Object.assign({}, args, {uuid: uuidv4()});
+    db.none('INSERT INTO following(follower, followee) VALUES($<follower>, $<followee>', values)
+        .then((data: any) => console.warn('Hiya', data));
+};
 
 
 //
@@ -97,5 +121,9 @@ export default {
     getAllPosts,
     getNPosts,
     createPost,
-    createOauthCreds
+    getAllReacts,
+    createOauthCreds,
+    getAllFollowings,
+    getUserFollowings,
+    createFollowing
 };

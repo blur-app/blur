@@ -14,33 +14,37 @@ interface User {
 
 interface Post {
     post_id: number
-    uuid: string
+    post_uuid: string
     user_id: number
-    content_id: number
     timestamp: string
     host: string
     source: string
 }
 
 
-interface Reacts {
+interface React {
     react_id: number
     name: string
     source: string
 }
 
-interface postReacts{
-    post_react_id: number
+interface PostReact{
+    react_id: number
     user_id: number
     post_id: number
-    react_id: number
+    post_react_id: number
     timestamp: string
 }
 
+interface Following{
+    follower: number
+    followee: number
+}
+
 interface oauthCreds{
-    client_id: string
+    client_id: number
     client_secret: string
-    service: string
     user_id: number
     refresh_token: string
+    service: string
 }
