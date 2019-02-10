@@ -83,8 +83,8 @@ OathCreds Table Queries
 //
 const createOauthCreds:Function = (args:Object)=>{
   const values: Object = Object.assign({}, args);
-  db.none('INSERT INTO oauth_creds(client_id, client_secret, service, user_id, refresh_token) VALUES(' +
-      '$<client_id>, $<client_secret>, $<service>, $<user_id>, $<refresh_token>)', values)
+  db.none('INSERT INTO oauth_creds(service, user_id, refresh_token, access_token) VALUES(' +
+      '$<service>, $<user_id>, $<refresh_token>, $<access_token>)', values)
       .then((data: any) => console.warn('Success', data));
 
 };
