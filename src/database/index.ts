@@ -66,18 +66,16 @@ Post and PostReact Table Queries
 
 // Return all Posts
 const getAllPosts:Function = async () => {
-    return await db.any('SELECT * FROM posts outer join postReacts on posts.user_id = postReacts.user_id' +
-        'group by postReacts.post_id order by post.timestamp');
+    return await db.any('SELECT * FROM posts outer join postReacts on posts.user_id = postReacts.user_id group by postReacts.post_id order by post.timestamp');
 };
 // Return n posts
-const getNPosts:Function = async (n: number) => {
-    return await db.any('SELECT * FROM posts order by timestamp limit ' + String(n));
+const getNPosts:Function = async (args: Object) => {
+    return await db.any('SELECT * FROM posts order by timestamp limit $<n> ', args);
 };
 // Create new post based on args
 const createPost:Function = (args: Object) => {
     const values: Object = Object.assign({}, args, {uuid: uuidv4()});
-    db.none('INSERT INTO users(post_id, uuid, user_id, timestamp, host, source) VALUES($<post_id>, ' +
-        '$<uuid>, $<user_id>, $<timestamp>, $<host>, $<source>)', values)
+    db.none('INSERT INTO users(post_id, uuid, user_id, timestamp, host, source) VALUES($<post_id>, $<uuid>, $<user_id>, $<timestamp>, $<host>, $<source>)', values)
         .then((data: any) => console.warn('Success', data));
 };
 
@@ -89,11 +87,15 @@ OathCreds Table Queries
 //
 const createOauthCreds:Function = (args:Object)=>{
   const values: Object = Object.assign({}, args);
-  db.none('INSERT INTO oauth_creds(service, user_id, refresh_token, access_token) VALUES(' +
-      '$<service>, $<user_id>, $<refresh_token>, $<access_token>)', values)
+  db.none('INSERT INTO oauth_creds(service, user_id, refresh_token, access_token) VALUES($<service>, $<user_id>, $<refresh_token>, $<access_token>)', values)
       .then((data: any) => console.warn('Success', data));
 
 };
+
+const getUserTokens: Function = async (args:Object)=> {
+    return await db.any('SELECT * FROM access_token, service, refresh_token, WHERE user_id = $<user_id>', args);
+};
+
 
 
 
@@ -132,5 +134,6 @@ export default {
     createOauthCreds,
     getAllFollowings,
     getUserFollowings,
+    getUserTokens,
     createFollowing
 };
