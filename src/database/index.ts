@@ -18,9 +18,6 @@ const cn:any = {
 
 const db:IDatabase<any> = pgp(cn);
 
-///
-/// BIG NOTE: I don't know what the Objects will look like so those args aren't implemented correctly
-///
 
 /*
 User Table Queries
@@ -79,15 +76,15 @@ OathCreds Table Queries
  */
 
 //
-const createOauthCreds:Function = (args:Object)=>{
+const createOauthCreds:Function = (args: Object)=>{
   const values: Object = Object.assign({}, args);
   db.none('INSERT INTO oauth_creds(service, user_id, refresh_token, access_token) VALUES($<service>, $<user_id>, $<refresh_token>, $<access_token>)', values)
       .then((data: any) => console.warn('Success', data));
 
 };
 
-const getUserTokens: Function = async (args:Object)=> {
-    return await db.any('SELECT * FROM access_token, service, refresh_token, WHERE user_id = $<user_id>', args);
+const getUserTokens: Function = async (args: Object)=> {
+    return await db.any('SELECT access_token, service, refresh_token FROM oauth_creds WHERE user_id = $<user_id>', args);
 };
 
 

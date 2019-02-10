@@ -74,7 +74,7 @@ const getUserFollowings: Function = async (args: Object) => {
     return db.getUserFollowings(args);
 };
 // Create new following
-const createFollowing: Function = (args: Object) => {
+const createFollowing: Function = (args: Following) => {
   return db.createFollowing(args);
 };
 

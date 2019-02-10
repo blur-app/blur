@@ -18,8 +18,8 @@ const schema: graphql.GraphQLSchema = buildSchema(`
     }
     
     type Mutation {
-        createUser(username: String!, password_hash: String!, first_name: String!, last_name: String!, email: String!): String
-        createPost(uuid: String!, user_id: Int!, content_id: Int!, timestamp: String, host: String!, source: String!): String
+        createUser(user_id: Int!, uuid: String!, username: String!, password_hash: String!, first_name: String!, last_name: String!, email: String!): String
+        createPost(post_id: Int!, post_uuid: String!, user_id: Int!, timestamp: String, host: String!, source: String!): String
         createOauthCreds(service: String!, user_id: Int!, refresh_token: String!, access_token: String!): String
     }
     
@@ -51,8 +51,8 @@ const schema: graphql.GraphQLSchema = buildSchema(`
     type Oauth_Creds{
         service: String
         user_id: Int 
-        access_token: String
         refresh_token: String
+        access_token: String
     }
     
     type Following {
