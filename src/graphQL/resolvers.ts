@@ -10,7 +10,7 @@ const getUsers: Function = () => {
     return db.getAllUsers();
 };
 // Return user based on given id
-const getUser: Function = (args : any) => {
+const getUser: Function = (args : Object) => {
     return db.getUser(args);
 };
 // Create new user based on args

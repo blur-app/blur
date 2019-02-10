@@ -88,7 +88,7 @@ const createOauthCreds:Function = (args: Object)=>{
       .then((data: any) => console.warn('Success', data));
 
 };
-
+// Returns access token, service, and refresh token
 const getUserTokens: Function = async (args: Object)=> {
     return await db.any('SELECT access_token, service, refresh_token FROM oauth_creds WHERE user_id = $<user_id>', args);
 };
