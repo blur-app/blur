@@ -28,7 +28,7 @@ interface React {
     source: string
 }
 
-interface post_react{
+interface PostReact{
     react_id: number
     user_id: number
     post_id: number
@@ -41,7 +41,7 @@ interface Following{
     followee: number
 }
 
-interface oauth_creds{
+interface OauthCreds{
     client_id: number
     client_secret: string
     user_id: number

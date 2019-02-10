@@ -46,9 +46,36 @@ const createPost: Function = (args: Post) => {
     return db.createPost(args);
 };
 
+
+
+/*
+OathCreds Table Queries
+ */
+
+//
 const createOauthCreds:Function = (args:any) =>{
     return db.createOauthCreds(args);
 };
+
+
+
+/*
+Following Table Queries
+ */
+
+// Return all followings
+const getAllFollowings: Function = async () => {
+    return db.getAllFollowings();
+};
+// Return user followings in which the user is being followed
+const getUserFollowings: Function = async (args: Object) => {
+    return db.getUserFollowings(args);
+};
+// Create new following
+const createFollowing: Function = (args: Object) => {
+  return db.createFollowing(args);
+};
+
 
 
 // Root resolver
@@ -60,5 +87,8 @@ export default {
     getNPosts,
     createPost,
     getAllReacts,
-    createOauthCreds
+    createOauthCreds,
+    getAllFollowings,
+    getUserFollowings,
+    createFollowing
 };
