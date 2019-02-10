@@ -17,8 +17,8 @@ exports.setup = function(options, seedLink) {
 exports.up = function(db) {
   db.changeColumn('following', 'follower', {primaryKey:true});
   db.changeColumn('following', 'followee', {primaryKey: true});
-  db.dropTable('content');
   db.removeColumn('posts', 'content_id');
+  db.dropTable('content');
   db.addColumn('posts' , 'host', {type:'string'});
   db.addColumn('posts' , 'source', {type:'string'});
 

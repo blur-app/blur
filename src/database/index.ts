@@ -39,8 +39,6 @@ const createUser:Function = (args: Object) => {
     db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>)', values)
         .then((data: any) => console.warn('Hiya', data));
 };
-
-
 /*
 Post and Content Table Queries
  */
@@ -57,14 +55,19 @@ const getNPosts:Function = async (n: number) => {
 };
 // Create new post based on args
 const createPost:Function = (args: Object) => {
-    console.warn('in insert dood');
     const values: Object = Object.assign({}, args, {uuid: uuidv4()});
-    db.none('INSERT INTO users(post_id, uuid, user_id, content_id, timestamp, host, source) VALUES($<post_id>, ' +
-        '$<uuid>, $<user_id>, $<content_id>, $<timestamp>, $<host>, $<source>)', values)
-        .then((data: any) => console.warn('Hiya', data));
+    db.none('INSERT INTO users(post_id, uuid, user_id, timestamp, host, source) VALUES($<post_id>, ' +
+        '$<uuid>, $<user_id>, $<timestamp>, $<host>, $<source>)', values)
+        .then((data: any) => console.warn('Success', data));
 };
 
+const createOauthCreds:Function = (args:Object)=>{
+  const values: Object = Object.assign({}, args);
+  db.none('INSERT INTO oauth_creds(client_id, client_secret, service, user_id) VALUES(' +
+      '$<client_id>, $<client_secret>, $<service>, $<user_id>)', values)
+      .then((data: any) => console.warn('Success', data));
 
+};
 
 
 
@@ -93,5 +96,6 @@ export default {
     createUser,
     getAllPosts,
     getNPosts,
-    createPost
+    createPost,
+    createOauthCreds
 };

@@ -23,7 +23,6 @@ interface Post {
 }
 
 
-
 interface Reacts {
     react_id: number
     name: string
@@ -36,4 +35,11 @@ interface postReacts{
     post_id: number
     react_id: number
     timestamp: string
+}
+
+interface oauthCreds{
+    client_id: string
+    client_secret: string
+    service: string
+    user_id: number
 }
