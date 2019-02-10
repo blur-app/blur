@@ -6,6 +6,7 @@ import { root, schema } from './graphQL';
 
 
 // Create an express server and a GraphQL endpoint
+
 const app: express.Application = express();
 app.use('/graphql', express_graphql({
     schema: schema,

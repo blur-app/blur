@@ -6,6 +6,10 @@ const schema: graphql.GraphQLSchema = buildSchema(`
         getUser(id: Int!): User
     }
     
+    type Mutation {
+        createUser(username: String!, password_hash: String!, first_name: String!, last_name: String!): Boolean
+    }
+    
     type User {
         user_id: Int,
         username: String,

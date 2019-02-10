@@ -1,5 +1,6 @@
 import promise from 'bluebird';
 import pgpromise, {IDatabase, IMain} from 'pg-promise';
+import uuidv4 from 'uuid/v4';
 
 const options: any = {
     promiseLib: promise,
@@ -28,6 +29,14 @@ const getAll: Function = () => {
         });
 };
 
+const insertDood: Function = (params: Object) => {
+    console.warn('in insert dood');
+    const values: Object = Object.assign({}, params, {uuid: uuidv4()});
+    db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>)', values)
+        .then((data: any) => console.warn('Hiya', data));
+};
+
 export default {
-    getAll
+    getAll,
+    insertDood
 };

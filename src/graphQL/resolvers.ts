@@ -1,3 +1,5 @@
+import db from '../database';
+
 const userData = [
     {
         user_id: 1,
@@ -27,9 +29,14 @@ const getUser: Function = (args : any) => {
     return userData.find((item) => item.user_id === args.id);
 };
 
+const createUser:Function = (args:any) => {
+    return db.insertDood(args);
+}
+
 
 // Root resolver
 export default {
     getUsers,
-    getUser
+    getUser,
+    createUser
 };
