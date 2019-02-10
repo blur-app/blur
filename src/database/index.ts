@@ -64,7 +64,7 @@ Post and PostReact Table Queries
 
 // Return all Posts
 const getAllPosts:Function = async () => {
-    return await db.any('SELECT * FROM posts left outer join postReacts on posts.user_id = postReacts.user_id group by postReacts.post_id order by post.timestamp');
+    return await db.any('SELECT posts.* FROM posts left outer join post_reacts on posts.user_id = post_reacts.user_id order by posts.timestamp');
 };
 // Return n posts
 const getNPosts:Function = async (args: Object) => {
@@ -73,7 +73,8 @@ const getNPosts:Function = async (args: Object) => {
 // Create new post based on args
 const createPost:Function = (args: Object) => {
     const values: Object = Object.assign({}, args, {uuid: uuidv4()});
-    db.none('INSERT INTO users(post_id, uuid, user_id, timestamp, host, source) VALUES($<post_id>, $<uuid>, $<user_id>, $<timestamp>, $<host>, $<source>)', values)
+    console.warn(args);
+    db.none('INSERT INTO posts(post_id, post_uuid, user_id, timestamp, host, source) VALUES($<post_id>, $<uuid>, $<user_id>, $<timestamp>, $<host>, $<source>)', values)
         .then((data: any) => console.warn('Success', data));
 };
 
