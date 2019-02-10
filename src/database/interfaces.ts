@@ -42,4 +42,5 @@ interface oauthCreds{
     client_secret: string
     service: string
     user_id: number
+    refresh_token: string
 }
