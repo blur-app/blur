@@ -22,7 +22,7 @@ const userData = [
 ];
 
 const getUsers: Function = () => {
-    return userData;
+    return db.getAllUsers();
 };
 
 const getUser: Function = (args : any) => {
@@ -30,7 +30,7 @@ const getUser: Function = (args : any) => {
 };
 
 const createUser:Function = (args:any) => {
-    return db.insertDood(args);
+    return db.createUser(args);
 }
 
 

@@ -29,7 +29,12 @@ const getAll: Function = () => {
         });
 };
 
-const insertDood: Function = (params: Object) => {
+const getAllUsers:Function = async () => {
+    const data = await db.any('SELECT * FROM users');
+    return data;
+};
+
+const createUser:Function = (params: Object) => {
     console.warn('in insert dood');
     const values: Object = Object.assign({}, params, {uuid: uuidv4()});
     db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>)', values)
@@ -38,5 +43,6 @@ const insertDood: Function = (params: Object) => {
 
 export default {
     getAll,
-    insertDood
+    getAllUsers,
+    createUser
 };

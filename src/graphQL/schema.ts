@@ -7,7 +7,7 @@ const schema: graphql.GraphQLSchema = buildSchema(`
     }
     
     type Mutation {
-        createUser(username: String!, password_hash: String!, first_name: String!, last_name: String!): Boolean
+        createUser(username: String!, password_hash: String!, first_name: String!, last_name: String!): String
     }
     
     type User {
