@@ -64,7 +64,7 @@ Post and PostReact Table Queries
 
 // Return all Posts
 const getAllPosts:Function = async () => {
-    return await db.any('SELECT * FROM posts outer join postReacts on posts.user_id = postReacts.user_id group by postReacts.post_id order by post.timestamp');
+    return await db.any('SELECT * FROM posts left outer join postReacts on posts.user_id = postReacts.user_id group by postReacts.post_id order by post.timestamp');
 };
 // Return n posts
 const getNPosts:Function = async (args: Object) => {
