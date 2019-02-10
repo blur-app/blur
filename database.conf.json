@@ -1,0 +1,9 @@
+{
+  "dev": {
+    "host": "host IP or name",
+    "user": "DB user name",
+    "password": "DB password",
+    "database": "DB name",
+    "driver": "postgresql"
+  }
+}
