@@ -18,17 +18,24 @@ const cn:any = {
 
 const db:IDatabase<any> = pgp(cn);
 
-// This is a sample, please please do it differently
+
+
+
+/*
+User Table Queries
+ */
+
+// Return User whose id is passed in
 const getUser:Function = async (args: Object) => {
     const data = await db.any('SELECT * FROM users WHERE user_id = $<user_id>', args);
     return data;
 };
-
+// Return all Users
 const getAllUsers:Function = async () => {
     const data = await db.any('SELECT * FROM users');
     return data;
 };
-
+// Create new user based on args
 const createUser:Function = (args: Object) => {
     console.warn('in insert dood');
     const values: Object = Object.assign({}, args, {uuid: uuidv4()});
@@ -36,6 +43,27 @@ const createUser:Function = (args: Object) => {
         .then((data: any) => console.warn('Hiya', data));
 };
 
+/*
+Post Table Queries
+ */
+
+// Return all Posts
+const getAllPosts:Function = async () => {
+    const data = await db.any('SELECT * FROM posts');
+    return data;
+};
+
+// Create new post based on args
+const createPost:Function = (args: Object) => {
+    console.warn('in insert dood');
+    const values: Object = Object.assign({}, args, {uuid: uuidv4()});
+    db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>)', values)
+        .then((data: any) => console.warn('Hiya', data));
+};
+
+
+
+//
 export default {
     getUser,
     getAllUsers,
