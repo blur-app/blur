@@ -1,13 +1,13 @@
 import promise from 'bluebird';
-import pgpromise from 'pg-promise';
+import pgpromise, {IDatabase, IMain} from 'pg-promise';
 
 const options: any = {
     promiseLib: promise,
 };
 
-const pgp = pgpromise(options);
+const pgp:IMain = pgpromise(options);
 
-const cn = {
+const cn:any = {
     host: process.env.PG_GCLOUD_HOST,
     port: 5432,
     database: process.env.PG_GCLOUD_DB,
@@ -15,10 +15,10 @@ const cn = {
     password: process.env.PG_GCLOUD_PW
 };
 
-const db = pgp(cn);
+const db:IDatabase<any> = pgp(cn);
 
 // This is a sample, please please do it differently
-const getAll: Function = () : any => {
+const getAll: Function = () => {
     db.any('select * from blur')
         .then((data: any) => {
             return data;
