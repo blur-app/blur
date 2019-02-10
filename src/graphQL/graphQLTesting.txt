@@ -1,0 +1,23 @@
+// get users
+query {
+  getUsers {
+    user_id
+    uuid
+    username
+    first_name
+    last_name
+    email
+  } 
+}
+
+// get user
+query test($user_id: Int = 10 ){
+  getUser( user_id: $user_id ) {
+    user_id
+    uuid
+    username
+    first_name
+    last_name
+    email
+  } 
+}

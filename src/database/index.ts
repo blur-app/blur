@@ -25,12 +25,11 @@ User Table Queries
 
 // Return user based on given id
 const getUser:Function = async (args: Object) => {
-    return await db.any('SELECT * FROM users WHERE user_id = $<user_id>', args);
-    console.warn(args);
+    return await db.one('SELECT * FROM users WHERE user_id = $<user_id>;', args);
 };
 // Return all Users
 const getAllUsers:Function = async () => {
-    return await db.any('SELECT * FROM users');
+    return await db.any('SELECT * FROM users;');
 };
 // Create new user based on args
 const createUser:Function = (args: Object) => {
@@ -39,12 +38,13 @@ const createUser:Function = (args: Object) => {
         .then((data: any) => console.warn('Hiya', data));
 };
 
+//
 const authUser:Function = async (args: User) => {
     const userData = await db.one('SELECT * FROM users WHERE username = $<username>', args);
     if(userData.password_hash === args.password_hash) {
         return userData
     }
-    throw Error('Incorrect Password sir')
+    throw Error('You tried authing with the wrong password bro')
 };
 
 /*
