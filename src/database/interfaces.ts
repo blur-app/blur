@@ -22,7 +22,6 @@ interface Post {
 }
 
 
-
 interface React {
     react_id: number
     name: string
@@ -47,4 +46,5 @@ interface oauth_creds{
     client_secret: string
     user_id: number
     service: string
+
 }

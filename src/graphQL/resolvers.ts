@@ -19,7 +19,6 @@ const createUser: Function = (args: User) => {
 };
 
 
-
 /*
 React Table Queries
  */
@@ -47,6 +46,10 @@ const createPost: Function = (args: Post) => {
     return db.createPost(args);
 };
 
+const createOauthCreds:Function = (args:any) =>{
+    return db.createOauthCreds(args);
+};
+
 
 // Root resolver
 export default {
@@ -56,5 +59,6 @@ export default {
     getAllPosts,
     getNPosts,
     createPost,
-    getAllReacts
+    getAllReacts,
+    createOauthCreds
 };
