@@ -19,14 +19,9 @@ const cn:any = {
 const db:IDatabase<any> = pgp(cn);
 
 // This is a sample, please please do it differently
-const getAll: Function = () => {
-    db.any('select * from blur')
-        .then((data: any) => {
-            return data;
-        })
-        .catch((err: Error) => {
-            return console.warn(err);
-        });
+const getUser:Function = async (args: Object) => {
+    const data = await db.any('SELECT * FROM users WHERE user_id = $<user_id>', args);
+    return data;
 };
 
 const getAllUsers:Function = async () => {
@@ -34,15 +29,15 @@ const getAllUsers:Function = async () => {
     return data;
 };
 
-const createUser:Function = (params: Object) => {
+const createUser:Function = (args: Object) => {
     console.warn('in insert dood');
-    const values: Object = Object.assign({}, params, {uuid: uuidv4()});
+    const values: Object = Object.assign({}, args, {uuid: uuidv4()});
     db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>)', values)
         .then((data: any) => console.warn('Hiya', data));
 };
 
 export default {
-    getAll,
+    getUser,
     getAllUsers,
     createUser
 };

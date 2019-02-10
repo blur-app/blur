@@ -26,7 +26,7 @@ const getUsers: Function = () => {
 };
 
 const getUser: Function = (args : any) => {
-    return userData.find((item) => item.user_id === args.id);
+    return db.getUser(args);
 };
 
 const createUser:Function = (args:any) => {

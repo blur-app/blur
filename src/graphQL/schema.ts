@@ -3,7 +3,7 @@ import graphql, {buildSchema} from "graphql";
 const schema: graphql.GraphQLSchema = buildSchema(`
     type Query {
         getUsers: [User],
-        getUser(id: Int!): User
+        getUser(user_id: Int!): User
     }
     
     type Mutation {
