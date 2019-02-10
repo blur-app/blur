@@ -26,6 +26,7 @@ User Table Queries
 // Return user based on given id
 const getUser:Function = async (args: Object) => {
     return await db.any('SELECT * FROM users WHERE user_id = $<user_id>', args);
+    console.warn(args);
 };
 // Return all Users
 const getAllUsers:Function = async () => {
