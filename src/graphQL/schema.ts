@@ -16,8 +16,8 @@ const schema: graphql.GraphQLSchema = buildSchema(`
     
     type Mutation {
         createOauthCreds(client_id: String!, client_secret: String!, service: String!, user_id: Int, refresh_token: String!): String
-        createUser(user_id: String!, username: String!, password_hash: String!, first_name: String!, last_name: String!): String
-        createPost(post_id: Int!, uuid: String!, user_id: Int!, content_id: Int!, timestamp: String, host: String!, source: String!): String
+        createUser(username: String!, password_hash: String!, first_name: String!, last_name: String!, email: String!): String
+        createPost(uuid: String!, user_id: Int!, content_id: Int!, timestamp: String, host: String!, source: String!): String
     }
     
     type User {

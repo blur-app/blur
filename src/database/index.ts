@@ -37,7 +37,7 @@ const getAllUsers:Function = async () => {
 // Create new user based on args
 const createUser:Function = (args: Object) => {
     const values: Object = Object.assign({}, args, {uuid: uuidv4()});
-    db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>)', values)
+    db.none('INSERT INTO users(uuid, username, password_hash, first_name, last_name, email) VALUES($<uuid>, $<username>, $<password_hash>, $<first_name>, $<last_name>, $<email>)', values)
         .then((data: any) => console.warn('Hiya', data));
 };
 
