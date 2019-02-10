@@ -4,3 +4,4 @@ docker/list.env
 .idea/*
 build
 npm-debug.log
+database.json
