@@ -21,3 +21,11 @@ query test($user_id: Int = 10 ){
     email
   } 
 }
+
+// create post
+mutation test($post_id: Int = 5, $post_uuid: String = "testboy1", $user_id:Int=10, $timestamp:String = "1970-01-01 00:00:01", $host: String="Twatter", $source: String="src//3r2ru3" ){
+  createPost( post_id: $post_id, post_uuid: $post_uuid, user_id:$user_id, timestamp:$timestamp, host:$host, source:$source  )
+}
+
+
+//
