@@ -41,19 +41,30 @@ const createUser:Function = (args: Object) => {
 };
 
 
+
 /*
-Post and Content Table Queries
+React Table Queries
+ */
+
+// Return all Reacts
+const getAllReacts:Function = async () => {
+    return await db.any('SELECT * FROM reacts orderby name');
+};
+
+
+
+/*
+Post and PostReact Table Queries
  */
 
 // Return all Posts
 const getAllPosts:Function = async () => {
-    const data = await db.any('SELECT * FROM posts orderby timestamp');
-    return data;
+    return await db.any('SELECT * FROM posts outer join postReacts on posts.user_id = postReacts.user_id' +
+        'group by postReacts.post_id order by post.timestamp');
 };
 //Return n posts
 const getNPosts:Function = async (n: number) => {
-    const data = await db.any('SELECT * FROM posts orderby timestamp limit ' + String(n));
-    return data;
+    return await db.any('SELECT * FROM posts order by timestamp limit ' + String(n));
 };
 // Create new post based on args
 const createPost:Function = (args: Object) => {
@@ -67,25 +78,6 @@ const createPost:Function = (args: Object) => {
 
 
 
-
-/*
-React Table Queries
- */
-
-
-
-/*
-PostReact Table Queries
- */
-
-
-
-// login to services
-const daLogin:Function = (args: Object) => {
-    const values: Object = Object.assign({}, args, )
-}
-
-
 //
 export default {
     getUser,
@@ -93,5 +85,6 @@ export default {
     createUser,
     getAllPosts,
     getNPosts,
-    createPost
-};
+    createPost,
+    getAllReacts
+}
