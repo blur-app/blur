@@ -14,9 +14,8 @@ interface User {
 
 interface Post {
     post_id: number
-    uuid: string
+    post_uuid: string
     user_id: number
-    content_id: number
     timestamp: string
     host: string
     source: string
@@ -24,16 +23,28 @@ interface Post {
 
 
 
-interface Reacts {
+interface React {
     react_id: number
     name: string
     source: string
 }
 
-interface postReacts{
-    post_react_id: number
+interface post_react{
+    react_id: number
     user_id: number
     post_id: number
-    react_id: number
+    post_react_id: number
     timestamp: string
+}
+
+interface Following{
+    follower: number
+    followee: number
+}
+
+interface oauth_creds{
+    client_id: number
+    client_secret: string
+    user_id: number
+    service: string
 }
