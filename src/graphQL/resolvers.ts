@@ -57,7 +57,9 @@ const createOauthCreds:Function = (args:any) =>{
     return db.createOauthCreds(args);
 };
 
-
+const getUserTokens: Function= async() =>{
+    return db.getUserTokens();
+}
 
 /*
 Following Table Queries
@@ -88,6 +90,7 @@ export default {
     createPost,
     getAllReacts,
     createOauthCreds,
+    getUserTokens,
     getAllFollowings,
     getUserFollowings,
     createFollowing

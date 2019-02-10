@@ -12,6 +12,9 @@ const schema: graphql.GraphQLSchema = buildSchema(`
         
         getAllFollowings: [Following]
         getUserFollowings: [Following]
+        
+        getUserTokens: [Oauth_Creds]
+        
     }
     
     type Mutation {
@@ -43,6 +46,13 @@ const schema: graphql.GraphQLSchema = buildSchema(`
         react_id: Int
         name: String
         source: String
+    }
+    
+    type Oauth_Creds{
+        service: String
+        user_id: Int 
+        access_token: String
+        refresh_token: String
     }
     
     type Following {

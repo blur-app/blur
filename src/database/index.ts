@@ -89,6 +89,11 @@ const createOauthCreds:Function = (args:Object)=>{
 
 };
 
+const getUserTokens: Function = async (args:Object)=> {
+    return await db.any('SELECT * FROM access_token, service, refresh_token, WHERE user_id = $<user_id>', args);
+};
+
+
 
 
 /*
@@ -125,5 +130,6 @@ export default {
     createOauthCreds,
     getAllFollowings,
     getUserFollowings,
+    getUserTokens,
     createFollowing
 };
